@@ -1,21 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import WordList from "./components/word-list";
 import findWordsInMatrix from "./game/find-words-in-matrix";
+import GameBoard from "./components/game-board/game-board";
 
 function GameOfBoggle() {
-  // create 4x4 grid of inputs for letters, buttons for checking
-
-  // const matrix: string[][] = [
-  //   ["t", "r", "e", "s"],
-  //   ["b", "e", "a", "t"],
-  //   ["c", "a", "r", "s"],
-  //   ["s", "e", "e", "t"],
-  // ];
-
   const [matrix, setMatrix] = useState<string[][]>([
-    ["t", "r", "e", "s"],
+    ["f", "r", "e", "s"],
     ["b", "e", "a", "t"],
     ["c", "a", "r", "s"],
     ["s", "e", "e", "t"],
@@ -29,11 +21,10 @@ function GameOfBoggle() {
     "set",
     "rest",
     "seat",
-    "bat",
     "cat",
     "east",
     "bear",
-    // "tear",
+    "fear",
   ]);
 
   const [newWord, setNewWord] = useState<string>("");
@@ -43,6 +34,12 @@ function GameOfBoggle() {
     newWordList.splice(newWordList.indexOf(word), 1);
 
     setWordList(newWordList);
+  };
+
+  const onLetterChange = (letter: string, xAxis: number, yAxis: number) => {
+    const newMatrix = [...matrix];
+    newMatrix[yAxis][xAxis] = letter;
+    setMatrix(newMatrix);
   };
 
   /*
@@ -56,37 +53,50 @@ function GameOfBoggle() {
   */
 
   return (
-    <Box className="App" padding="100px">
-      {/* component to accept new matrix */}
+    <Box className="App" padding="100px" height={"100vh"}>
+      <Typography variant="h1" pb={5}>
+        Word Game
+      </Typography>
+      <Box display="flex" flexDirection="row" justifyContent="space-evenly">
+        <GameBoard matrix={matrix} onLetterChange={onLetterChange} />
 
-      {/* display current word list, allow remove and add */}
-      <WordList wordList={wordList} onRemove={onRemoveWordFromList} />
-      <Box display="flex" px={2} py={2}>
-        <TextField
-          label="Add new word"
-          onChange={(word) => {
-            setNewWord(word.target.value);
-          }}
-          value={newWord}
-        />
-        <Button
-          id="add-word-button"
-          onClick={() => {
-            setWordList([...wordList, newWord]);
-          }}
-        >
-          {"Add Word"}
-        </Button>
-      </Box>
-      {/* Check array */}
-      <Button id="check-matrix-button" />
+        <Box display="flex" flexDirection="column" alignContent="center">
+          <WordList wordList={wordList} onRemove={onRemoveWordFromList} />
+          <Box
+            display="flex"
+            flexDirection="row"
+            px={2}
+            py={2}
+            alignItems="center"
+          >
+            <TextField
+              label="Add new word"
+              onChange={(word) => {
+                setNewWord(word.target.value);
+              }}
+              value={newWord}
+            />
+            <Button
+              id="add-word-button"
+              onClick={() => {
+                setWordList([...wordList, newWord]);
+                setNewWord("");
+              }}
+            >
+              {"Add Word"}
+            </Button>
+          </Box>
+        </Box>
 
-      <Box display="flex">
-        <Box id="matches-box">
-          <Typography>{"Words found in matrix: "}</Typography>
-          {Array.from(findWordsInMatrix(matrix, wordList)).map((foundWord) => {
-            return <Typography>{foundWord}</Typography>;
-          })}
+        <Box display="flex">
+          <Box id="matches-box">
+            <Typography>{"Words found in matrix: "}</Typography>
+            {Array.from(findWordsInMatrix(matrix, wordList)).map(
+              (foundWord) => {
+                return <Typography>{foundWord}</Typography>;
+              }
+            )}
+          </Box>
         </Box>
       </Box>
     </Box>

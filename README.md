@@ -29,4 +29,5 @@ npm start
 # Areas from improvement
 
 - Testing coverage
-- 
+- Bulk update word list (.csv, .txt)
+- Use A more compact selector for alphabet

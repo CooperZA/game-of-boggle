@@ -1,25 +1,3 @@
-// Sample word list
-// const wordList: string[] = [
-//   "tree",
-//   "bee",
-//   "see",
-//   "test",
-//   "set",
-//   "rest",
-//   "seat",
-//   "bat",
-//   "cat",
-//   "east",
-// ];
-
-// Sample 4x4 matrix of letters (replace with any desired matrix)
-// const matrix: string[][] = [
-//   ["t", "r", "e", "s"],
-//   ["b", "e", "a", "t"],
-//   ["c", "a", "r", "s"],
-//   ["s", "e", "e", "t"],
-// ];
-
 // Directions for movement in the grid
 const directions: number[][] = [
   [-1, 0],
