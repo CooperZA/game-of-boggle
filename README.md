@@ -30,4 +30,4 @@ npm start
 
 - Testing coverage
 - Bulk update word list (.csv, .txt)
-- Use A more compact selector for alphabet
+- Use a more compact selector for alphabet

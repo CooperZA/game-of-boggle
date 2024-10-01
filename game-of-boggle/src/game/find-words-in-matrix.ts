@@ -88,5 +88,4 @@ function findWordsInMatrix(
   return foundWords;
 }
 
-
 export default findWordsInMatrix;

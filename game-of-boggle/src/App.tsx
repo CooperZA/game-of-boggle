@@ -42,16 +42,6 @@ function GameOfBoggle() {
     setMatrix(newMatrix);
   };
 
-  /*
-    Rules:
-    
-    - Words must be at least three letters in length.
-    - Each letter after the first must be a horizontal, vertical, or diagonal neighbor of the one before it.
-    - No individual letter cube may be used more than once in a word.
-    - No capitalized or hyphenated words are allowed.
-  
-  */
-
   return (
     <Box className="App" padding="100px" height={"100vh"}>
       <Typography variant="h1" pb={5}>
@@ -59,7 +49,6 @@ function GameOfBoggle() {
       </Typography>
       <Box display="flex" flexDirection="row" justifyContent="space-evenly">
         <GameBoard matrix={matrix} onLetterChange={onLetterChange} />
-
         <Box display="flex" flexDirection="column" alignContent="center">
           <WordList wordList={wordList} onRemove={onRemoveWordFromList} />
           <Box
@@ -87,7 +76,6 @@ function GameOfBoggle() {
             </Button>
           </Box>
         </Box>
-
         <Box display="flex">
           <Box id="matches-box">
             <Typography>{"Words found in matrix: "}</Typography>

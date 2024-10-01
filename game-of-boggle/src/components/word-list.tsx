@@ -9,12 +9,7 @@ const WordList = ({ wordList, onRemove }: IWordListProps) => {
   return (
     <Box display="flex" flexDirection="column">
       <Typography>Word List</Typography>
-      <Box
-        display="flex"
-        flexWrap="wrap"
-        border={1}
-        borderRadius={1}
-      >
+      <Box display="flex" flexWrap="wrap" border={1} borderRadius={1}>
         {wordList.map((word) => {
           return (
             <Box px={2} py={2}>
